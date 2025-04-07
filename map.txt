@@ -1,0 +1,54 @@
+$ cat << EOF | oc apply -f -
+apiVersion: forklift.konveyor.io/v1beta1
+kind: StorageMap
+metadata:
+  name: <storage_map>
+  namespace: <namespace>
+spec:
+  map:
+    - destination:
+        storageClass: <storage_class>
+        accessMode: <access_mode> 
+      source:
+        id: <source_datastore> 
+  provider:
+    source:
+      name: <source_provider>
+      namespace: <namespace>
+    destination:
+      name: <destination_provider>
+      namespace: <namespace>
+EOF
+
+
+---
+
+$  cat << EOF | oc apply -f -
+apiVersion: forklift.konveyor.io/v1beta1
+kind: NetworkMap
+metadata:
+  name: <network_map>
+  namespace: <namespace>
+spec:
+  map:
+    - destination:
+        name: <network_name>
+        type: pod 
+      source: 
+        id: <source_network_id>
+        name: <source_network_name>
+    - destination:
+        name: <network_attachment_definition> 
+        namespace: <network_attachment_definition_namespace> 
+        type: multus
+      source:
+        id: <source_network_id>
+        name: <source_network_name>
+  provider:
+    source:
+      name: <source_provider>
+      namespace: <namespace>
+    destination:
+      name: <destination_provider>
+      namespace: <namespace>
+EOF
