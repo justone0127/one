@@ -1,0 +1,227 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  annotations:
+    defaults.template.kubevirt.io/disk: rootdisk
+    description: Template for Red Hat Enterprise Linux 6 VM or newer. A PVC with the
+      RHEL disk image must be available.
+    iconClass: icon-rhel
+    name.os.template.kubevirt.io/rhel6.0: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.1: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.10: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.2: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.3: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.4: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.5: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.6: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.7: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.8: Red Hat Enterprise Linux 6.0 or higher
+    name.os.template.kubevirt.io/rhel6.9: Red Hat Enterprise Linux 6.0 or higher
+    openshift.io/display-name: Red Hat Enterprise Linux 6.0+ VM
+    openshift.io/documentation-url: https://github.com/kubevirt/common-templates
+    openshift.io/provider-display-name: Red Hat
+    openshift.io/support-url: https://github.com/kubevirt/common-templates/issues
+    openshift.kubevirt.io/pronounceable-suffix-for-name-expression: 'true'
+    operator-sdk/primary-resource: openshift-cnv/ssp-kubevirt-hyperconverged
+    operator-sdk/primary-resource-type: SSP.ssp.kubevirt.io
+    tags: hidden,kubevirt,virtualmachine,linux,rhel
+    template.kubevirt.io/editable: |
+      /objects[0].spec.template.spec.domain.cpu.sockets
+      /objects[0].spec.template.spec.domain.cpu.cores
+      /objects[0].spec.template.spec.domain.cpu.threads
+      /objects[0].spec.template.spec.domain.memory.guest
+      /objects[0].spec.template.spec.domain.devices.disks
+      /objects[0].spec.template.spec.volumes
+      /objects[0].spec.template.spec.networks
+    template.kubevirt.io/images: |
+      https://access.redhat.com/downloads/content/69/ver=/rhel---6/6.10/x86_64/product-software
+    template.kubevirt.io/provider: Red Hat
+    template.kubevirt.io/provider-support-level: Full
+    template.kubevirt.io/provider-url: https://www.redhat.com
+    template.kubevirt.io/version: v1alpha1
+    template.openshift.io/bindable: 'false'
+  creationTimestamp: '2024-08-05T02:01:50Z'
+  labels:
+    app.kubernetes.io/component: templating
+    app.kubernetes.io/managed-by: ssp-operator
+    app.kubernetes.io/name: common-templates
+    app.kubernetes.io/part-of: hyperconverged-cluster
+    app.kubernetes.io/version: 4.15.3
+    flavor.template.kubevirt.io/small: 'true'
+    os.template.kubevirt.io/rhel6.0: 'true'
+    os.template.kubevirt.io/rhel6.1: 'true'
+    os.template.kubevirt.io/rhel6.2: 'true'
+    os.template.kubevirt.io/rhel6.3: 'true'
+    os.template.kubevirt.io/rhel6.4: 'true'
+    os.template.kubevirt.io/rhel6.5: 'true'
+    os.template.kubevirt.io/rhel6.6: 'true'
+    os.template.kubevirt.io/rhel6.7: 'true'
+    os.template.kubevirt.io/rhel6.8: 'true'
+    os.template.kubevirt.io/rhel6.9: 'true'
+    os.template.kubevirt.io/rhel6.10: 'true'
+    template.kubevirt.io/default-os-variant: 'true'
+    template.kubevirt.io/type: base
+    template.kubevirt.io/version: v0.27.0
+    workload.template.kubevirt.io/server: 'true'
+  managedFields:
+    - apiVersion: template.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:defaults.template.kubevirt.io/disk: {}
+            f:description: {}
+            f:iconClass: {}
+            f:name.os.template.kubevirt.io/rhel6.0: {}
+            f:name.os.template.kubevirt.io/rhel6.1: {}
+            f:name.os.template.kubevirt.io/rhel6.2: {}
+            f:name.os.template.kubevirt.io/rhel6.3: {}
+            f:name.os.template.kubevirt.io/rhel6.4: {}
+            f:name.os.template.kubevirt.io/rhel6.5: {}
+            f:name.os.template.kubevirt.io/rhel6.6: {}
+            f:name.os.template.kubevirt.io/rhel6.7: {}
+            f:name.os.template.kubevirt.io/rhel6.8: {}
+            f:name.os.template.kubevirt.io/rhel6.9: {}
+            f:name.os.template.kubevirt.io/rhel6.10: {}
+            f:openshift.io/display-name: {}
+            f:openshift.io/documentation-url: {}
+            f:openshift.io/provider-display-name: {}
+            f:openshift.io/support-url: {}
+            f:openshift.kubevirt.io/pronounceable-suffix-for-name-expression: {}
+            f:operator-sdk/primary-resource: {}
+            f:operator-sdk/primary-resource-type: {}
+            f:tags: {}
+            f:template.kubevirt.io/editable: {}
+            f:template.kubevirt.io/images: {}
+            f:template.kubevirt.io/provider: {}
+            f:template.kubevirt.io/provider-support-level: {}
+            f:template.kubevirt.io/provider-url: {}
+            f:template.kubevirt.io/version: {}
+            f:template.openshift.io/bindable: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+            f:app.kubernetes.io/version: {}
+            f:flavor.template.kubevirt.io/small: {}
+            f:os.template.kubevirt.io/rhel6.0: {}
+            f:os.template.kubevirt.io/rhel6.1: {}
+            f:os.template.kubevirt.io/rhel6.2: {}
+            f:os.template.kubevirt.io/rhel6.3: {}
+            f:os.template.kubevirt.io/rhel6.4: {}
+            f:os.template.kubevirt.io/rhel6.5: {}
+            f:os.template.kubevirt.io/rhel6.6: {}
+            f:os.template.kubevirt.io/rhel6.7: {}
+            f:os.template.kubevirt.io/rhel6.8: {}
+            f:os.template.kubevirt.io/rhel6.9: {}
+            f:os.template.kubevirt.io/rhel6.10: {}
+            f:template.kubevirt.io/default-os-variant: {}
+            f:template.kubevirt.io/type: {}
+            f:template.kubevirt.io/version: {}
+            f:workload.template.kubevirt.io/server: {}
+        f:objects: {}
+        f:parameters: {}
+      manager: manager
+      operation: Update
+      time: '2024-08-05T02:01:50Z'
+  name: rhel6-server-small
+  namespace: openshift
+  resourceVersion: '720870'
+  uid: 2f8d6c92-00ad-40d2-bb1c-95997d073312
+objects:
+  - apiVersion: kubevirt.io/v1
+    kind: VirtualMachine
+    metadata:
+      annotations:
+        vm.kubevirt.io/validations: "\n[\n\n  {\n\n    \"name\": \"minimal-required-memory\"\
+          ,\n\n    \"path\": \"jsonpath::.spec.domain.memory.guest\",\n\n    \"rule\"\
+          : \"integer\",\n\n    \"message\": \"This VM requires more memory.\",\n\n\
+          \    \"min\": 1073741824\n\n  }\n\n]\n"
+      labels:
+        app: ${NAME}
+        vm.kubevirt.io/template: rhel6-server-small
+        vm.kubevirt.io/template.revision: '1'
+        vm.kubevirt.io/template.version: v0.19.3
+      name: ${NAME}
+    spec:
+      dataVolumeTemplates:
+        - apiVersion: cdi.kubevirt.io/v1beta1
+          kind: DataVolume
+          metadata:
+            name: ${NAME}
+          spec:
+            sourceRef:
+              kind: DataSource
+              name: ${DATA_SOURCE_NAME}
+              namespace: ${DATA_SOURCE_NAMESPACE}
+            storage:
+              resources:
+                requests:
+                  storage: 30Gi
+      running: false
+      template:
+        metadata:
+          annotations:
+            vm.kubevirt.io/flavor: small
+            vm.kubevirt.io/os: rhel6
+            vm.kubevirt.io/workload: server
+          labels:
+            kubevirt.io/domain: ${NAME}
+            kubevirt.io/size: small
+        spec:
+          domain:
+            cpu:
+              cores: 1
+              sockets: 1
+              threads: 1
+            devices:
+              disks:
+                - disk:
+                    bus: virtio
+                  name: rootdisk
+                - disk:
+                    bus: virtio
+                  name: cloudinitdisk
+              interfaces:
+                - masquerade: {}
+                  model: virtio
+                  name: default
+              networkInterfaceMultiqueue: true
+              rng: {}
+            machine:
+              type: pc-i440fx-rhel7.6.0
+            memory:
+              guest: 2Gi
+          networks:
+            - name: default
+              pod: {}
+          terminationGracePeriodSeconds: 180
+          volumes:
+            - dataVolume:
+                name: ${NAME}
+              name: rootdisk
+            - cloudInitNoCloud:
+                userData: |
+                  #cloud-config
+                  user: cloud-user
+                  password: ${CLOUD_USER_PASSWORD}
+                  chpasswd: { expire: False }
+              name: cloudinitdisk
+parameters:
+  - description: VM name
+    from: rhel6-[a-z0-9]{16}
+    generate: expression
+    name: NAME
+  - description: Name of the DataSource to clone
+    name: DATA_SOURCE_NAME
+    value: rhel6
+  - description: Namespace of the DataSource
+    name: DATA_SOURCE_NAMESPACE
+    value: openshift-virtualization-os-images
+  - description: Randomized password for the cloud-init user cloud-user
+    from: '[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}'
+    generate: expression
+    name: CLOUD_USER_PASSWORD
