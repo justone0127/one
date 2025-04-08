@@ -1,0 +1,94 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: rhel6-server-poc
+objects:
+- apiVersion: kubevirt.io/v1
+  kind: VirtualMachine
+  metadata:
+    labels:
+      app: ${NAME}
+      vm.kubevirt.io/template: rhel6-server-poc
+      vm.kubevirt.io/template.revision: "1"
+    name: ${NAME}
+  spec:
+    dataVolumeTemplates:
+      - apiVersion: cdi.kubevirt.io/v1beta1
+        kind: DataVolume
+        metadata:
+          name: ${NAME}
+        spec:
+          source:
+            pvc:
+              name: rhel6-image
+              namespace: ${DATA_SOURCE_NAMESPACE}
+          storage:
+            resources:
+              requests:
+                storage: 30Gi
+    running: true
+    template:
+      metadata:
+        annotations:
+          vm.kubevirt.io/flavor: small
+          vm.kubevirt.io/os: rhel6
+          vm.kubevirt.io/workload: server
+        creationTimestamp: null
+        labels:
+          kubevirt.io/domain: ${NAME}
+          kubevirt.io/size: small
+      spec:
+        architecture: amd64
+        domain:
+          cpu:
+            cores: 2
+            sockets: 1
+            threads: 1
+          devices:
+            disks:
+              - disk:
+                  bus: virtio
+                name: rootdisk
+              - disk:
+                  bus: virtio
+                name: cloudinitdisk
+            interfaces:
+            - masquerade: {}
+              model: virtio
+              name: default
+            networkInterfaceMultiqueue: true
+            rng: {}
+          machine:
+            type: pc-i440fx-rhel7.6.0
+          memory:
+            guest: 4Gi
+          resources: {}
+        networks:
+          - name: default
+            pod: {}
+        terminationGracePeriodSeconds: 180
+        volumes:
+          - dataVolume:
+              name: ${NAME}
+            name: rootdisk
+          - cloudInitNoCloud:
+              userData: |-
+                #cloud-config
+                user: cloud-user
+                password: redhat
+                chpasswd: { expire: False }
+            name: cloudinitdisk
+parameters:
+- description: VM name
+  from: rhel6-vm
+  generate: expression
+  name: NAME
+- description: Name of the DataSource to clone
+  name: DATA_SOURCE_NAME
+  value: rhel6
+- description: Namespace of the DataSource
+  name: DATA_SOURCE_NAMESPACE
+  value: openshift-virtualization-os-images
+- description: Randomized password for the cloud-init user cloud-user
+  name: CLOUD_USER_PASSWORD
+  value: openshift
