@@ -1,4 +1,15 @@
 # RHEL 6 
+
+oc annotate --overwrite -n openshift-cnv hco kubevirt-hyperconverged   kubevirt.kubevirt.io/jsonpatch='[
+  {"op": "add", "path": "/spec/configuration/architectureConfiguration", "value": {} },
+  {"op": "add", "path": "/spec/configuration/architectureConfiguration/amd64", "value": {} },
+  {"op": "add", "path": "/spec/configuration/architectureConfiguration/amd64/emulatedMachines", "value": ["q35*", "pc-q35*", "pc-i440fx-rhel7.6.0"] } ]'
+
+# 머신 타입 수정
+
+            machine:
+              type: pc-i440fx-rhel7.6.0
+
 VM 시작 후
 core perfctr but no constraints 에러 발생 할 경우
 
