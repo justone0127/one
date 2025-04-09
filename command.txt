@@ -18,3 +18,7 @@ VM 정지
 아래 명령어 수행 필요
 oc patch vm VM_NAME --type=merge -p '{"spec":{"template":{"spec":{"domain":{"devices":{"useVirtioTransitional":true}}}}}}'
 
+
+
+oc patch storagecluster ocs-storagecluster -n openshift-storage --type json --patch '[{ "op": "replace", "path": "/spec/managedResources/cephCluster/fullRatio", "value": 0.90 }]'
+
